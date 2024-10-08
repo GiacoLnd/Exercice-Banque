@@ -5,14 +5,14 @@ class Client{
     private string $prenom;
     private DateTime $naissance;
     private string $ville;
-    private array $comptes;
+    private array $libele;
 
     public function __construct(string $nom, string $prenom,string $naissance, string $ville){
         $this -> nom = $nom;
         $this -> prenom = $prenom;
         $this -> naissance = new DateTime ($naissance);
         $this -> ville = $ville;
-        $this -> comptes = [];
+        $this -> libele = [];
     }
 
     public function getNom()
@@ -81,13 +81,13 @@ class Client{
         $this -> comptes[] = $compte;
     }
 
-    public function afficherComptes(){
-        $result = "<h3> $this possède les comptes suivant :</h3>";
-        foreach ($this->comptes as $compte){
-            $result .= $compte;
-        }
-        return $result;
+    public function calculerAge(){
+        
     }
+
+    public function afficherComptes(){
+        $result = "<h3> Information Client : <br>";
+
 
 
 }
