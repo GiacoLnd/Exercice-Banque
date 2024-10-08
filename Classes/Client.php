@@ -7,7 +7,7 @@ class Client{
     private string $ville;
     private array $comptes;
 
-    public function __construct(string $nom, string $prenom,string $naissance, string $ville, string $comptes){
+    public function __construct(string $nom, string $prenom,string $naissance, string $ville){
         $this -> nom = $nom;
         $this -> prenom = $prenom;
         $this -> naissance = new DateTime ($naissance);
@@ -21,7 +21,7 @@ class Client{
     }
 
 
-    public function setNom($nom)
+    public function setNom(string $nom) : string
     {
         $this->nom = $nom;
     }
@@ -32,7 +32,7 @@ class Client{
     }
 
 
-    public function setPrenom($prenom)
+    public function setPrenom(string $prenom): string
     {
         $this->prenom = $prenom;
     }
@@ -44,7 +44,7 @@ class Client{
     }
 
 
-    public function setNaissance($naissance)
+    public function setNaissance(string $naissance) : string
     {
         $this->naissance = $naissance;
     }
@@ -56,7 +56,7 @@ class Client{
     }
 
 
-    public function setVille($ville)
+    public function setVille(string $ville) : string
     {
         $this->ville = $ville;
     }
@@ -68,16 +68,25 @@ class Client{
     }
 
 
-    public function setComptes($comptes)
+    public function setComptes(Compte $comptes)
     {
         $this->comptes = $comptes;
     }
     
-    public function __toString(){
-        return $this -> nom ." ". $this -> prenom." ". $this -> naissance ." ". $this -> ville ." ". $this -> comptes;
+    public function __tostring(){
+        return $this -> nom." ".$this->prenom."<br>";
     }
-    public function afficherComptes(Compte $compte){
+
+    public function recupererComptes(Compte $compte){
         $this -> comptes[] = $compte;
+    }
+
+    public function afficherComptes(){
+        $result = "<h3> $this possède les comptes suivant :</h3>";
+        foreach ($this->comptes as $compte){
+            $result .= $compte;
+        }
+        return $result;
     }
 
 

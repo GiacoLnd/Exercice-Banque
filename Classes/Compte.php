@@ -9,10 +9,10 @@ class Compte{
 
     public function __construct(string $libelle, float $solde, string $devise, Client $client){
         $this -> libelle = $libelle;
-        $this -> solde = 0.00;
+        $this -> solde = $solde;
         $this -> devise = $devise;
         $this -> client = $client;
-        $this -> client -> afficherComptes($this);
+        $this -> client -> recupererComptes($this);
     }
 
     
@@ -62,17 +62,23 @@ class Compte{
         return $this;
     }
 
-    public function depotArgent($montant){
-        $this -> solde += $montant;
-        return "Votre $libelle a été crédité de $this->$montant. Votre dépot est de $this->solde.<br> ";
+    public function depotArgent(float $montant){
+        $result = $this -> solde += $montant;
+        return "Votre $this->libelle possède maintenant $result $this->devise";
     }
 
-    public function retraitArgent($montant){
+    public function retraitArgent(float $montant){
         $result = $this->solde;
-        if ($this->solde >= $montant){
-            return $result = $this -> solde -= $montant;
+        if ($result >= $montant){
+            $result -= $montant;
+            return "Vous venez de retirer $montant $this->devise. Vous avez $result $this->devise sur votre $this->libelle. ";
+        } else {
+            return "Vous ne pouvez pas retirer $montant $this->devise car votre $this->libelle a atteint son plafond de retrait.";
         }
+    }
 
+    public function virement($montant){
+        
     }
 
 
