@@ -3,92 +3,99 @@
 class Client{
     private string $nom;
     private string $prenom;
-    private DateTime $naissance;
+    private string $naissance;
     private string $ville;
-    private array $libele;
+    private array $comptes;
 
-    public function __construct(string $nom, string $prenom,string $naissance, string $ville){
+public function __construct(string $nom, string $prenom,string $naissance, string $ville){
         $this -> nom = $nom;
         $this -> prenom = $prenom;
-        $this -> naissance = new DateTime ($naissance);
+        $this -> naissance = $naissance;
         $this -> ville = $ville;
-        $this -> libele = [];
-    }
+        $this -> comptes = [];
+}
 
-    public function getNom()
+public function getNom()
     {
         return $this->nom;
     }
 
 
-    public function setNom(string $nom) : string
+public function setNom(string $nom)
     {
         $this->nom = $nom;
     }
 
-    public function getPrenom()
+public function getPrenom()
     {
         return $this->prenom;
     }
 
 
-    public function setPrenom(string $prenom): string
+public function setPrenom(string $prenom)
     {
         $this->prenom = $prenom;
     }
 
 
-    public function getNaissance()
+public function getNaissance()
     {
-        return $this->naissance->format('d-m-Y');
+        return $this->naissance;
     }
 
 
-    public function setNaissance(string $naissance) : string
+public function setNaissance( $naissance)
     {
         $this->naissance = $naissance;
     }
 
 
-    public function getVille()
+public function getVille()
     {
         return $this->ville;
     }
 
 
-    public function setVille(string $ville) : string
+public function setVille(string $ville)
     {
         $this->ville = $ville;
     }
-
-
-    public function getComptes()
-    {
+public function getComptes()
+{
         return $this->comptes;
-    }
+}
+
+public function setComptes(array $comptes)
+{
+        $this->comptes = $compte;
+}
+
+function calculteAge(){
+    $dateNaissance = date("Y", strtotime($this->naissance));
+    $annee = date("Y");
+    $age = $annee - $dateNaissance; 
+    return $age;
+}
 
 
-    public function setComptes(Compte $comptes)
-    {
-        $this->comptes = $comptes;
-    }
-    
+
     public function __tostring(){
-        return $this -> nom." ".$this->prenom."<br>";
+        return $this -> nom." ".$this->prenom." ".$this->ville." ". $this->calculteAge()." ans";
     }
 
-    public function recupererComptes(Compte $compte){
+public function recupererComptes(Compte $compte){
         $this -> comptes[] = $compte;
     }
 
-    public function calculerAge(){
-        
-    }
 
-    public function afficherComptes(){
-        $result = "<h3> Information Client : <br>";
+public function afficherComptes(){
+        $result = "<h3> Information Client : $this </h3> <br>";
+        foreach ($this -> comptes as $compte){
+            $result .= "$compte<br>";
+        }
+        return $result;
 
-
+        }
 
 }
 

@@ -21,45 +21,42 @@ class Compte{
         return $this->libelle;
     }
 
-    public function setLibelle($libelle) : string
+    public function setLibelle($libelle) 
     {
         $this->libelle = $libelle;
     }
 
-    public function getTitulaire()
-    {
-        return $this->titulaire;
-    }
-
-    public function setTitulaire($titulaire) : array
-    {
-        $this->titulaire = $titulaire;
-
-        return $this;
-    }
-
-    public function getSolde()
+    public function getSolde(): float
     {
         return $this->solde;
     }
 
-    public function setSolde($solde) : float
+    public function setSolde($solde)
     {
         $this->solde = 0.00;
-
-        return $this;
     }
 
-    public function getDevise()
+    public function getDevise(): string
     {
         return $this->devise;
     }
 
-    public function setDevise($devise) : float
+    public function setDevise($devise)
     {
         $this->devise = $devise;
+    }
+    
+    public function getClient() : string
+    {
+        return $this->client;
+    }
 
-        return $this;
+    public function setClient(Client $client)
+    {
+        $this->client = $client;
+    }
+    public function __tostring(){
+        return $this->libelle ." ". $this -> solde ." ". $this->devise;
     }
 
     public function depotArgent(float $montant){
@@ -77,9 +74,28 @@ class Compte{
         }
     }
 
-    public function virement($montant){
-        
+   public function crediter($montant){   
+    $this->solde += $montant;
+   }
+   public function debiter($montant){
+    $result = $this->solde;
+    if ($result >= $montant){
+        $result -= $montant;
+        return  $result; 
+    } else {
+        return "Pas assez de fonds";
+    }
+    }   
+
+    public function VirementCompte($compteDebiteur, $compteCrediteur, $montant){
+        if ($compteDebiteur -> debiter($montant)){
+           $compteCrediteur -> crediter($montant);
+           return "Virement effectue avec succes d'un montant de $montant";
+       } else {
+        return "Pas assez de fonds";
+       }  
+    }
+   
+
     }
 
-
-}
