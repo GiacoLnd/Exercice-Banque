@@ -16,7 +16,7 @@ class Compte{
     }
 
     
-    public function getLibelle()
+    public function getLibelle(): string
     {
         return $this->libelle;
     }
@@ -87,15 +87,13 @@ class Compte{
     }
     }   
 
-    public function VirementCompte($compteDebiteur, $compteCrediteur, $montant){
-        if ($compteDebiteur -> debiter($montant)){
-           $compteCrediteur -> crediter($montant);
-           return "Virement effectue avec succes d'un montant de $montant";
-       } else {
-        return "Pas assez de fonds";
-       }  
-    }
-   
-
+    public function VirementCompte(Compte $compteCrediteur, $montant){
+        if ($this->solde >=$montant){
+            $this->solde -= $montant;
+            $compteCrediteur->solde += $montant;
+            return "Virement effectue avec succes d'un montant de $montant $this->devise. Votre $compteCrediteur->libelle possède maintenant $compteCrediteur->solde $compteCrediteur->devise. Votre $this->libelle possède maintenant $this->solde $this->devise";
+        } else {
+            return "Pas assez de fonds";}
+        }
     }
 

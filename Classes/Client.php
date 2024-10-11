@@ -15,7 +15,7 @@ public function __construct(string $nom, string $prenom,string $naissance, strin
         $this -> comptes = [];
 }
 
-public function getNom()
+public function getNom(): string
     {
         return $this->nom;
     }
@@ -26,7 +26,7 @@ public function setNom(string $nom)
         $this->nom = $nom;
     }
 
-public function getPrenom()
+public function getPrenom(): string 
     {
         return $this->prenom;
     }
@@ -38,7 +38,7 @@ public function setPrenom(string $prenom)
     }
 
 
-public function getNaissance()
+public function getNaissance(): string
     {
         return $this->naissance;
     }
@@ -50,7 +50,7 @@ public function setNaissance( $naissance)
     }
 
 
-public function getVille()
+public function getVille(): string
     {
         return $this->ville;
     }
@@ -60,7 +60,7 @@ public function setVille(string $ville)
     {
         $this->ville = $ville;
     }
-public function getComptes()
+public function getComptes(): array
 {
         return $this->comptes;
 }
@@ -70,7 +70,7 @@ public function setComptes(array $comptes)
         $this->comptes = $compte;
 }
 
-function calculteAge(){
+function calculteAge(): int{
     $dateNaissance = date("Y", strtotime($this->naissance));
     $annee = date("Y");
     $age = $annee - $dateNaissance; 
